@@ -19,7 +19,7 @@ Add `http-monitoring-tools` as a dependency:
 $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 ```
 
-**Requires Node v12 or later.**
+**N.B.** Requires Node v12 or later.
 
 ## Usage
 
