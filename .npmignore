@@ -14,3 +14,4 @@ node_modules
 .github*
 .eslintrc
 .package-lock.json
+test.js
