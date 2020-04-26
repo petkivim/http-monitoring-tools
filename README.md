@@ -2,10 +2,11 @@
 
 # HTTP Monitoring Tools
 
-HTTP Monitoring Tools is a Node.js library that provides tools for monitoring
-availability and certificate validity of HTTP endpoints:
+HTTP Monitoring Tools is an ECMAScript (ES) module that provides tools for
+monitoring availability and certificate validity of HTTP endpoints:
 
-*  `getHealthInfo` returns information HTTP endpoint's availability, such as HTTP status code, request duration in milliseconds, is endpoint considered healthy.
+*  `getHealthInfo` returns information HTTP endpoint's availability, such
+as HTTP status code, request duration in milliseconds, is endpoint considered healthy.
 * `getSslCertificateInfo` returns basic information about HTTP endpoint's SSL
 certificate, such as common name, issued date, expire date, number of valid
 days left.
@@ -17,6 +18,8 @@ Add `http-monitoring-tools` as a dependency:
 ```
 $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 ```
+
+**Requires Node v12 or later.**
 
 ## Usage
 
