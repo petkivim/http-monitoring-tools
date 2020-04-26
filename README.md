@@ -1,11 +1,9 @@
-
-
 # HTTP Monitoring Tools
 
 HTTP Monitoring Tools is an ECMAScript (ES) module that provides tools for
 monitoring availability and certificate validity of HTTP endpoints:
 
-*  `getHealthInfo` returns information HTTP endpoint's availability, such
+* `getHealthInfo` returns information HTTP endpoint's availability, such
 as HTTP status code, request duration in milliseconds, is endpoint considered healthy.
 * `getSslCertificateInfo` returns basic information about HTTP endpoint's SSL
 certificate, such as common name, issued date, expire date, number of valid
@@ -50,9 +48,10 @@ Returns:
 ```
 
 `isHealthy` is `true` when `httpStatusCode` is between 200 and 399. Otherwise
-`isHealthy` is `false`. Some sites, e.g. Squarespace, may return status code
-400 if `user-agent` HTTP header is missing even if the site is working normally.
-Therefore, the default value `{ 'user-agent': '...' }` is used.
+`isHealthy` is `false`. Some sites, e.g. sites hosted on Squarespace, may
+return status code 400 if `user-agent` HTTP header is missing even if the site
+is working normally. Therefore, the default value `{ 'user-agent': '...' }` is
+used.
 
 #### Options
 | Option | Default | |
@@ -102,6 +101,8 @@ Returns:
   fingerprint: '51:E2:E8:B8:38:39:0F:FD:8F:5D:3F:93:F4:AE:BC:42:8B:3E:77:13'
 }
 ```
+
+**N.B.** Self-signed certificates are supported.
 
 #### Options
 | Option | Default | |

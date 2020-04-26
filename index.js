@@ -75,11 +75,11 @@ function generateSslCertificateInfoResponse(res, options) {
   Generate response object returned by the getHealthInfo function.
  */
 function generateHealthInfoResponse(res, options, startAt) {
-  const isHealthy = res.statusCode >= 200 && res.statusCode < 400 ? true : false
+  const isHealthy = res.statusCode >= 200 && res.statusCode < 400
   return {
     host: options.hostname,
     httpStatusCode: res.statusCode,
-    isHealthy: isHealthy,
+    isHealthy,
     now: formatDate(new Date()),
     requestDuration: new Date() - startAt,
     useHttps: options.https,
