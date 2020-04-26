@@ -1,12 +1,14 @@
 
+
 # HTTP Monitoring Tools
 
 HTTP Monitoring Tools is a Node.js library that provides tools for monitoring
 availability and certificate validity of HTTP endpoints:
 
-* `getSslCertificateInfo` returns basic information of HTTP endpoint's SSL
+*  `getHealthInfo` returns information HTTP endpoint's availability, such as HTTP status code, request duration in milliseconds, is endpoint considered healthy.
+* `getSslCertificateInfo` returns basic information about HTTP endpoint's SSL
 certificate, such as common name, issued date, expire date, number of valid
-days left, etc.
+days left.
 
 ## Installation
 
@@ -18,6 +20,51 @@ $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 
 ## Usage
 
+### getHealthInfo
+```
+import http-monitoring-tools from "http-monitoring-tools";
+
+(async function() {
+  try {
+    const response = await tools.getHealthInfo('www.google.com')
+    console.log(response)
+  } catch(e) {
+    console.log(e)
+  }
+})();
+
+```
+Returns:
+```
+{
+  host: 'www.google.com',
+  httpStatusCode: 200,
+  isHealthy: true,
+  now: '2020-04-26T11:43:23.504Z',
+  requestDuration: 153,
+  useHttps: true
+}
+```
+#### Options
+| Option | Default | |
+|--|--|--|
+| port | `443` | Target port |
+| path | ` ` | Target path |
+| method | `HEAD` | HTTP request method |
+| headers | `{ 'user-agent': '...' }` | HTTP request headers |
+| https | `true` | Send request using `https`. When `https=false`, `http` is used  |
+
+Override default options:
+```
+# Override port and method
+tools.getSslCertificateInfo('www.google.com', { port: 8443, method: 'POST' })
+
+# Use http instead of https
+tools.getSslCertificateInfo('www.google.com', { port: 80, https: false })
+
+# Override headers
+tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'value'} })
+```
 ### getSslCertificateInfo
 ```
 import http-monitoring-tools from "http-monitoring-tools";
@@ -52,7 +99,7 @@ Returns:
 |--|--|--|
 | port | `443` | Target port |
 | path | ` ` | Target path |
-| method | `HEAD` | HTTP method |
+| method | `HEAD` | HTTP request method |
 | headers | `{ 'user-agent': '...' }` | HTTP request headers |
 
 Override default options:

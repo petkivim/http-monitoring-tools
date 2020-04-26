@@ -21,10 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import http from 'http'
 import https from 'https'
 
 // One day in milliseconds
 const millisPerDay = 1000 * 60 * 60 * 24
+// Default request headers
+const defaultHeaders = { 'user-agent': '...' }
 
 /*
     Calculate difference between the dates, divide by milliseconds per day,
@@ -69,11 +72,25 @@ function generateSslCertificateInfoResponse(res, options) {
 }
 
 /*
-  Generate options for getSslCertificateInfo function by merging user
-  supplied options and default options.
+  Generate response object returned by the getHealthInfo function.
+ */
+function generateHealthInfoResponse(res, options, startAt) {
+  const isHealthy = res.statusCode >= 200 && res.statusCode < 400 ? true : false
+  return {
+    host: options.hostname,
+    httpStatusCode: res.statusCode,
+    isHealthy: isHealthy,
+    now: formatDate(new Date()),
+    requestDuration: new Date() - startAt,
+    useHttps: options.https,
+  }
+}
+
+/*
+  Generate options for getHealthInfo and getSslCertificateInfo functions
+  by merging user supplied options and default options.
 */
-function getSslCertificateInfoOptions(hostname, options = {}) {
-  const headers = { 'user-agent': '...' }
+function getRequestOptions(hostname, options = {}) {
   return {
     hostname,
     port: options.port === undefined ? 443 : options.port,
@@ -83,17 +100,32 @@ function getSslCertificateInfoOptions(hostname, options = {}) {
     rejectUnauthorized: false,
     // Connection timeout is 30s
     timeout: 30000,
-    headers: options.headers === undefined ? headers : options.headers,
+    headers: options.headers === undefined ? defaultHeaders : options.headers,
+    https: options.https === undefined ? true : options.https,
   }
 }
 
 export default {
   getSslCertificateInfo(hostname, userOptions) {
     return new Promise((resolve, reject) => {
-      const options = getSslCertificateInfoOptions(hostname, userOptions)
+      const options = getRequestOptions(hostname, userOptions)
       const req = https.request(options, (res) => {
         res.certificate = res.connection.getPeerCertificate()
         resolve(generateSslCertificateInfoResponse(res, options))
+      }).on('timeout', () => {
+        req.abort()
+      }).on('error', (e) => {
+        reject(e)
+      })
+      req.end()
+    })
+  },
+  getHealthInfo(hostname, userOptions) {
+    return new Promise((resolve, reject) => {
+      const options = getRequestOptions(hostname, userOptions)
+      const startAt = new Date()
+      const req = (options.https ? https : http).request(options, (res) => {
+        resolve(generateHealthInfoResponse(res, options, startAt))
       }).on('timeout', () => {
         req.abort()
       }).on('error', (e) => {
