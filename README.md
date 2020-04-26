@@ -45,6 +45,12 @@ Returns:
   useHttps: true
 }
 ```
+
+`isHealthy` is `true` when `httpStatusCode` is between 200 and 399. Otherwise
+`isHealthy` is `false`. Some sites, e.g. Squarespace, may return status code
+400 if `user-agent` HTTP header is missing even if the site is working normally.
+Therefore, the default value `{ 'user-agent': '...' }` is used.
+
 #### Options
 | Option | Default | |
 |--|--|--|
