@@ -23,7 +23,7 @@ $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 
 ### getHealthInfo
 ```
-import http-monitoring-tools from "http-monitoring-tools";
+import tools from "http-monitoring-tools";
 
 (async function() {
   try {
@@ -75,7 +75,7 @@ tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'valu
 ```
 ### getSslCertificateInfo
 ```
-import http-monitoring-tools from "http-monitoring-tools";
+import tools from "http-monitoring-tools";
 
 (async function() {
   try {
