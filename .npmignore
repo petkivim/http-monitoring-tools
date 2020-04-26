@@ -13,3 +13,4 @@ node_modules
 .git*
 .github*
 .eslintrc
+.package-lock.json

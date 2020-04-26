@@ -2,7 +2,7 @@
   "name": "http-monitoring-tools",
   "version": "1.0.0",
   "description": "Toolset for monitoring availability and certificate validity of HTTP endpoints.",
-  "main": "http-monitoring-tools.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "lint": "npx eslint --ignore-path .gitignore .",
