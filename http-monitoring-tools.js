@@ -62,7 +62,6 @@ function generateSslCertificateInfoResponse(res, options) {
     validFrom: formatDate(res.certificate.valid_from),
     validTo: formatDate(res.certificate.valid_to),
     now: formatDate(new Date()),
-    httpStatusCode: res.statusCode,
     validDaysLeftCount: validDaysCount,
     valid: validDaysCount >= 0,
     fingerprint: res.certificate.fingerprint,
