@@ -24,7 +24,15 @@ $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 CommonJS:
 ```
 const tools = require('http-monitoring-tools')
+```
 
+ES module:
+```
+import tools from 'http-monitoring-tools'
+```
+
+Request:
+```
 tools.getHealthInfo('www.google.com').then((res) => {
   console.log(res)
 }).catch((e) =>  {
@@ -32,21 +40,7 @@ tools.getHealthInfo('www.google.com').then((res) => {
 })
 ```
 
-ES module:
-```
-import tools from 'http-monitoring-tools'
-
-(async function() {
-  try {
-    const response = await tools.getHealthInfo('www.google.com')
-    console.log(response)
-  } catch(e) {
-    console.log(e)
-  }
-})();
-```
-
-Returns:
+Response:
 ```
 {
   host: 'www.google.com',
@@ -89,29 +83,23 @@ tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'valu
 CommonJS:
 ```
 const tools = require('http-monitoring-tools')
-
-tools.getSslCertificateInfo('www.google.com').then((res) => {
-  console.log(res)
-}).catch((e) => {
-  console.log(e)
-})
 ```
 
 ES module:
 ```
 import tools from 'http-monitoring-tools'
-
-(async function() {
-  try {
-    const response = await tools.getSslCertificateInfo('www.google.com')
-    console.log(response)
-  } catch(e) {
-    console.log(e)
-  }
-})();
 ```
 
-Returns:
+Request:
+```
+tools.getSslCertificateInfo('www.google.com').then((res) => {
+  console.log(res)
+}).catch((e) =>  {
+  console.log(e)
+})
+```
+
+Response:
 ```
 {
   host: 'www.google.com',
