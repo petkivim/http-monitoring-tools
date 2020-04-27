@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import http from 'http'
-import https from 'https'
+const http = require('http')
+const https = require('https')
 
 // One day in milliseconds
 const millisPerDay = 1000 * 60 * 60 * 24
@@ -105,7 +105,7 @@ function getRequestOptions(hostname, options = {}) {
   }
 }
 
-export default {
+module.exports = {
   getSslCertificateInfo(hostname, userOptions) {
     return new Promise((resolve, reject) => {
       const options = getRequestOptions(hostname, userOptions)

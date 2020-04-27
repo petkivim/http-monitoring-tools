@@ -1,9 +1,9 @@
 # HTTP Monitoring Tools
 
-HTTP Monitoring Tools is an ECMAScript (ES) module that provides tools for
-monitoring availability and certificate validity of HTTP endpoints:
+HTTP Monitoring Tools provides tools for monitoring availability and
+certificate validity of HTTP endpoints:
 
-* `getHealthInfo` returns information HTTP endpoint's availability, such
+* `getHealthInfo` returns information about HTTP endpoint's availability, such
 as HTTP status code, request duration in milliseconds, is endpoint considered healthy.
 * `getSslCertificateInfo` returns basic information about HTTP endpoint's SSL
 certificate, such as common name, issued date, expire date, number of valid
@@ -17,23 +17,17 @@ Add `http-monitoring-tools` as a dependency:
 $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 ```
 
-**N.B.** Requires Node v12 or later.
-
 ## Usage
 
 ### getHealthInfo
 ```
-import tools from "http-monitoring-tools";
+const tools = require('http-monitoring-tools')
 
-(async function() {
-  try {
-    const response = await tools.getHealthInfo('www.google.com')
-    console.log(response)
-  } catch(e) {
-    console.log(e)
-  }
-})();
-
+tools.getHealthInfo('niis.org').then((res) => {
+  console.log(res)
+}).catch((e) =>  {
+  console.log(e)
+})
 ```
 Returns:
 ```
@@ -75,17 +69,13 @@ tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'valu
 ```
 ### getSslCertificateInfo
 ```
-import tools from "http-monitoring-tools";
+const tools = require('http-monitoring-tools')
 
-(async function() {
-  try {
-    const response = await tools.getSslCertificateInfo('www.google.com')
-    console.log(response)
-  } catch(e) {
-    console.log(e)
-  }
-})();
-
+tools.getSslCertificateInfo('niis.org').then((res) => {
+  console.log(res)
+}).catch((e) => {
+  console.log(e)
+})
 ```
 Returns:
 ```
