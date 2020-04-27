@@ -70,13 +70,13 @@ used.
 Override default options:
 ```
 # Override port and method
-tools.getSslCertificateInfo('www.google.com', { port: 8443, method: 'POST' })
+tools.getHealthInfo('www.google.com', { port: 8443, method: 'POST' })
 
 # Use http instead of https
-tools.getSslCertificateInfo('www.google.com', { port: 80, https: false })
+tools.getHealthInfo('www.google.com', { port: 80, https: false })
 
 # Override headers
-tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'value'} })
+tools.getHealthInfo('www.google.com', { headers: { 'custom-header':'value', 'another-header':'foo'} })
 ```
 ### getSslCertificateInfo
 
