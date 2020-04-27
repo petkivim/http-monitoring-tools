@@ -1,6 +1,6 @@
 {
   "name": "http-monitoring-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Toolset for monitoring availability and certificate validity of HTTP endpoints.",
   "type": "module",
   "module": "./esm/index.js",
