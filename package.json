@@ -27,9 +27,9 @@
     "LICENSE",
     "README.md",
     "HISTORY.md",
-    "./cjs/index.js",
-    "./cjs/package.json",
-    "./esm/index.js"
+    "cjs/index.js",
+    "cjs/package.json",
+    "esm/index.js"
   ],
   "keywords": [
     "http",
