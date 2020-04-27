@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-const http = require('http')
-const https = require('https')
+import http from 'http'
+import https from 'https'
 
 // One day in milliseconds
 const millisPerDay = 1000 * 60 * 60 * 24
@@ -105,33 +105,34 @@ function getRequestOptions(hostname, options = {}) {
   }
 }
 
-module.exports = {
-  getSslCertificateInfo(hostname, userOptions) {
-    return new Promise((resolve, reject) => {
-      const options = getRequestOptions(hostname, userOptions)
-      const req = https.request(options, (res) => {
-        res.certificate = res.connection.getPeerCertificate()
-        resolve(generateSslCertificateInfoResponse(res, options))
-      }).on('timeout', () => {
-        req.abort()
-      }).on('error', (e) => {
-        reject(e)
-      })
-      req.end()
+export function getSslCertificateInfo(hostname, userOptions) {
+  return new Promise((resolve, reject) => {
+    const options = getRequestOptions(hostname, userOptions)
+    const req = https.request(options, (res) => {
+      res.certificate = res.connection.getPeerCertificate()
+      resolve(generateSslCertificateInfoResponse(res, options))
+    }).on('timeout', () => {
+      req.abort()
+    }).on('error', (e) => {
+      reject(e)
     })
-  },
-  getHealthInfo(hostname, userOptions) {
-    return new Promise((resolve, reject) => {
-      const options = getRequestOptions(hostname, userOptions)
-      const startAt = new Date()
-      const req = (options.https ? https : http).request(options, (res) => {
-        resolve(generateHealthInfoResponse(res, options, startAt))
-      }).on('timeout', () => {
-        req.abort()
-      }).on('error', (e) => {
-        reject(e)
-      })
-      req.end()
-    })
-  },
+    req.end()
+  })
 }
+
+export function getHealthInfo(hostname, userOptions) {
+  return new Promise((resolve, reject) => {
+    const options = getRequestOptions(hostname, userOptions)
+    const startAt = new Date()
+    const req = (options.https ? https : http).request(options, (res) => {
+      resolve(generateHealthInfoResponse(res, options, startAt))
+    }).on('timeout', () => {
+      req.abort()
+    }).on('error', (e) => {
+      reject(e)
+    })
+    req.end()
+  })
+}
+
+export default { getHealthInfo, getSslCertificateInfo }

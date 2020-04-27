@@ -20,15 +20,32 @@ $ npm install http-monitoring-tools --save # npm i -s http-monitoring-tools
 ## Usage
 
 ### getHealthInfo
+
+CommonJS:
 ```
 const tools = require('http-monitoring-tools')
 
-tools.getHealthInfo('niis.org').then((res) => {
+tools.getHealthInfo('www.google.com').then((res) => {
   console.log(res)
 }).catch((e) =>  {
   console.log(e)
 })
 ```
+
+ES module:
+```
+import tools from 'http-monitoring-tools'
+
+(async function() {
+  try {
+    const response = await tools.getHealthInfo('www.google.com')
+    console.log(response)
+  } catch(e) {
+    console.log(e)
+  }
+})();
+```
+
 Returns:
 ```
 {
@@ -68,15 +85,32 @@ tools.getSslCertificateInfo('www.google.com', { port: 80, https: false })
 tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'value'} })
 ```
 ### getSslCertificateInfo
+
+CommonJS:
 ```
 const tools = require('http-monitoring-tools')
 
-tools.getSslCertificateInfo('niis.org').then((res) => {
+tools.getSslCertificateInfo('www.google.com').then((res) => {
   console.log(res)
 }).catch((e) => {
   console.log(e)
 })
 ```
+
+ES module:
+```
+import tools from 'http-monitoring-tools'
+
+(async function() {
+  try {
+    const response = await tools.getSslCertificateInfo('www.google.com')
+    console.log(response)
+  } catch(e) {
+    console.log(e)
+  }
+})();
+```
+
 Returns:
 ```
 {
@@ -109,4 +143,12 @@ tools.getSslCertificateInfo('www.google.com', { port: 8443, method: 'POST' })
 
 # Override headers
 tools.getSslCertificateInfo('www.google.com', { headers: { 'custom-header':'value'} })
+```
+
+## Build
+
+```
+$ git clone https://github.com/petkivim/http-monitoring-tools.git
+$ npm install
+$ npm run cjs
 ```

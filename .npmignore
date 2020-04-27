@@ -15,4 +15,4 @@ node_modules
 .eslintrc
 .package-lock.json
 .travis.yml
-test.js
+test*.js
