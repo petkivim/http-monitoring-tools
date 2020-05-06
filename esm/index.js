@@ -58,16 +58,24 @@ function formatDate(date) {
  */
 function generateSslCertificateInfoResponse(res, options) {
   const validDaysCount = getValidDaysCount(res.certificate.valid_to)
-  return {
-    host: options.hostname,
-    commonName: res.certificate.subject.CN,
-    issuerCommonName: res.certificate.issuer.CN,
-    validFrom: formatDate(res.certificate.valid_from),
-    validTo: formatDate(res.certificate.valid_to),
-    now: formatDate(new Date()),
-    validDaysLeftCount: validDaysCount,
-    valid: validDaysCount >= 0,
-    fingerprint: res.certificate.fingerprint,
+  try {
+    return {
+      host: options.hostname,
+      commonName: res.certificate.subject.CN,
+      issuerCommonName: res.certificate.issuer.CN,
+      validFrom: formatDate(res.certificate.valid_from),
+      validTo: formatDate(res.certificate.valid_to),
+      now: formatDate(new Date()),
+      validDaysLeftCount: validDaysCount,
+      valid: validDaysCount >= 0,
+      fingerprint: res.certificate.fingerprint,
+    }
+  } catch (e) {
+    return {
+      host: options.hostname,
+      now: formatDate(new Date()),
+      error: 'Unable to read SSL certificate',
+    }
   }
 }
 
