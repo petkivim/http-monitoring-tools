@@ -121,7 +121,7 @@ fails, a less detailed response is returned:
 {
   host: 'example.com',
   now: '2020-05-03T12:30:30.975Z',
-  error: 'Unable to read SSL certificate',
+  error: 'Unable to read SSL certificate'
 }
 ```
 
