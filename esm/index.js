@@ -108,6 +108,8 @@ function getRequestOptions(hostname, options = {}) {
     rejectUnauthorized: false,
     // Connection timeout is 30s
     timeout: 30000,
+    // Opt out of connection pooling by not using an Agent
+    agent: false,
     headers: options.headers === undefined ? defaultHeaders : options.headers,
     https: options.https === undefined ? true : options.https,
   }
