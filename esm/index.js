@@ -106,8 +106,8 @@ function getRequestOptions(hostname, options = {}) {
     method: options.method === undefined ? 'HEAD' : options.method,
     // Self-signed certificates are supported
     rejectUnauthorized: false,
-    // Connection timeout is 10s
-    timeout: 10000,
+    // Connection timeout is 20s by default
+    timeout: options.timeout === undefined ? 20000 : options.timeout,
     // Opt out of connection pooling by not using an Agent
     agent: false,
     headers: options.headers === undefined ? defaultHeaders : options.headers,

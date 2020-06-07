@@ -66,6 +66,7 @@ used.
 | method | `HEAD` | HTTP request method |
 | headers | `{ 'user-agent': '...' }` | HTTP request headers |
 | https | `true` | Send request using `https`. When `https=false`, `http` is used  |
+| timeout | `20000` | HTTP request timeout in milliseconds (`20s` by default) |
 
 Override default options:
 ```
@@ -134,6 +135,7 @@ fails, a less detailed response is returned:
 | path | ` ` | Target path |
 | method | `HEAD` | HTTP request method |
 | headers | `{ 'user-agent': '...' }` | HTTP request headers |
+| timeout | `20000` | HTTP request timeout in milliseconds (`20s` by default) |
 
 Override default options:
 ```
